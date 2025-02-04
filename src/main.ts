@@ -28,6 +28,7 @@ async function bootstrap() {
     .setDescription('API para el manejo de la informacion de cntrataciones')
     .addTag('aspirantes')
     .addTag('antecedentes')
+    .addTag('diagnosticos')
     .build();
 
     const documentFactory = () => SwaggerModule.createDocument(app, config);
