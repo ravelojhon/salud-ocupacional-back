@@ -7,10 +7,12 @@ import { AntecedentesController } from './modulos/antecedentes/antecedentes.cont
 import { AntecedentesService } from './modulos/antecedentes/antecedentes.service';
 import { DiagnosticosController } from './modulos/diagnosticos/diagnosticos.controller';
 import { DiagnosticosService } from './modulos/diagnosticos/diagnosticos.service';
+import { HistoriaClinicaService } from './modulos/historia-clinica/historia-clinica.service';
+import { HistoriaClinicaController } from './modulos/historia-clinica/historia-clinica.controller';
 
 @Module({
   imports: [],
-  controllers: [AppController, AspirantesController, AntecedentesController, DiagnosticosController],
-  providers: [AppService, AspirantesService, AntecedentesService, DiagnosticosService],
+  controllers: [AppController, AspirantesController, AntecedentesController, DiagnosticosController, HistoriaClinicaController],
+  providers: [AppService, AspirantesService, AntecedentesService, DiagnosticosService, HistoriaClinicaService],
 })
 export class AppModule {}

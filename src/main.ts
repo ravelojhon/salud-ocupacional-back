@@ -29,6 +29,7 @@ async function bootstrap() {
     .addTag('aspirantes')
     .addTag('antecedentes')
     .addTag('diagnosticos')
+    .addTag('HistoriaClinica')
     .build();
 
     const documentFactory = () => SwaggerModule.createDocument(app, config);

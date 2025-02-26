@@ -15,7 +15,7 @@ export class DiagnosticosController {
           return this.diagnosticosService.getDiagnosticos();
         }
         
-        @Get('gineco/:paramName')
+        @Get('/:paramName')
         findAllGineco(@Param('paramName') paramName:string) {
           return this.diagnosticosService.getDiagnosticosByName(paramName);
         }
