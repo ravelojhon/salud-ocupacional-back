@@ -9,10 +9,16 @@ import { DiagnosticosController } from './modulos/diagnosticos/diagnosticos.cont
 import { DiagnosticosService } from './modulos/diagnosticos/diagnosticos.service';
 import { HistoriaClinicaService } from './modulos/historia-clinica/historia-clinica.service';
 import { HistoriaClinicaController } from './modulos/historia-clinica/historia-clinica.controller';
+import { TipoDocumentosService } from './modulos/tipo-documentos/tipo-documentos.service';
+import { TipoDocumentosController } from './modulos/tipo-documentos/tipo-documentos.controller';
+import { CiudadService } from './modulos/ciudad/ciudad.service';
+import { CiudadController } from './modulos/ciudad/ciudad.controller';
+import { NivelEducativoController } from './modulos/nivel-educativo/nivel-educativo.controller';
+import { NivelEducativoService } from './modulos/nivel-educativo/nivel-educativo.service';
 
 @Module({
   imports: [],
-  controllers: [AppController, AspirantesController, AntecedentesController, DiagnosticosController, HistoriaClinicaController],
-  providers: [AppService, AspirantesService, AntecedentesService, DiagnosticosService, HistoriaClinicaService],
+  controllers: [AppController, AspirantesController, AntecedentesController, DiagnosticosController, HistoriaClinicaController, TipoDocumentosController, CiudadController, NivelEducativoController],
+  providers: [AppService, AspirantesService, AntecedentesService, DiagnosticosService, HistoriaClinicaService, TipoDocumentosService, CiudadService, NivelEducativoService],
 })
 export class AppModule {}
