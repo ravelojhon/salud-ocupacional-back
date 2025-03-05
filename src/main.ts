@@ -43,6 +43,12 @@ async function bootstrap() {
     .addTag('Factor Riesgo Psicosocial')
     .addTag('Factor Riesgo Ambiental')
     .addTag('Factor Riesgo Locativo')
+    .addTag('Horario de Trabajo')
+    .addTag('EPS')
+    .addTag('ARL')
+    .addTag('Fondo de Pensiones')
+    .addTag('Estado Civil')
+    .addTag('Grupo Sanguíneo')
     .build();
 
     const documentFactory = () => SwaggerModule.createDocument(app, config);
