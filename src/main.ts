@@ -27,6 +27,22 @@ async function bootstrap() {
     .setTitle('API Contrataciones')
     .setDescription('API para el manejo de la informacion de cntrataciones')
     .addTag('aspirantes')
+    .addTag('antecedentes')
+    .addTag('diagnosticos')
+    .addTag('HistoriaClinica')
+    .addTag('tipo-documentos')
+    .addTag('ciudad')
+    .addTag('nivel-educativo')
+    .addTag('Empresas')
+    .addTag('Regimen')
+    .addTag('actividades-economicas')
+    .addTag('Elementos Proteccion Personal')
+    .addTag('Factor Riesgo Biológico')
+    .addTag('Factor Riesgo Químico')
+    .addTag('Factor Riesgo Físico')
+    .addTag('Factor Riesgo Psicosocial')
+    .addTag('Factor Riesgo Ambiental')
+    .addTag('Factor Riesgo Locativo')
     .build();
 
     const documentFactory = () => SwaggerModule.createDocument(app, config);
