@@ -17,12 +17,17 @@ findAll() {
 
 @Post()
 async createAspirante(@Body() createAspiranteDTO: CreateAspiranteDTO) {
-    return this.aspirantesService.CreateAspirantes(createAspiranteDTO);
+    return this.aspirantesService.createAspirante(createAspiranteDTO);
 }
 
 @Patch()
 async editAspirante(@Body() createAspiranteDTO: CreateAspiranteDTO) {
-    return this.aspirantesService.editAspirantes(createAspiranteDTO);
+    return this.aspirantesService.editAspirante(createAspiranteDTO);
+}
+
+@Get(':id')
+async getAspiranteById(@Param('id') id: number) {
+    return this.aspirantesService.getAspiranteById(id);
 }
 
 }
