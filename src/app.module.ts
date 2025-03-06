@@ -44,6 +44,21 @@ import { ElementosProteccionPersonalService } from './modulos/elementos-protecci
 import { AuthController } from './modulos/auth/auth.controller';
 import { AuthService } from './modulos/auth/auth.service';
 import { AuthModule } from './modulos/auth/auth.module';
+import { UploadFilesController } from './modulos/upload-files/upload-files.controller';
+import { PrestadorController } from './modulos/prestador/prestador.controller';
+import { PrestadorService } from './modulos/prestador/prestador.service';
+import { HorarioTrabajoService } from './modulos/horario-trabajo/horario-trabajo.service';
+import { HorarioTrabajoController } from './modulos/horario-trabajo/horario-trabajo.controller';
+import { EpsService } from './modulos/eps/eps.service';
+import { EpsController } from './modulos/eps/eps.controller';
+import { ArlController } from './modulos/arl/arl.controller';
+import { ArlService } from './modulos/arl/arl.service';
+import { FondoPensionesService } from './modulos/fondo-pensiones/fondo-pensiones.service';
+import { FondoPensionesController } from './modulos/fondo-pensiones/fondo-pensiones.controller';
+import { EstadoCivilController } from './modulos/estado-civil/estado-civil.controller';
+import { EstadoCivilService } from './modulos/estado-civil/estado-civil.service';
+import { GrupoSanguineoService } from './modulos/grupo-sanguineo/grupo-sanguineo.service';
+import { GrupoSanguineoController } from './modulos/grupo-sanguineo/grupo-sanguineo.controller';
 
 @Module({
   imports: [AuthModule],
@@ -70,6 +85,14 @@ import { AuthModule } from './modulos/auth/auth.module';
     FactorRiesgoElectricoController,
     FactorRiesgoLocativoController,
     ElementosProteccionPersonalController,
+    UploadFilesController,
+    PrestadorController,
+    HorarioTrabajoController,
+    EpsController,
+    ArlController,
+    FondoPensionesController,
+    GrupoSanguineoController,
+    EstadoCivilController,
   ],
   providers: [
     AppService,
@@ -94,6 +117,13 @@ import { AuthModule } from './modulos/auth/auth.module';
     FactorRiesgoElectricoService,
     FactorRiesgoLocativoService,
     ElementosProteccionPersonalService,
+    PrestadorService,
+    HorarioTrabajoService,
+    EpsService,
+    ArlService,
+    FondoPensionesService,
+    EstadoCivilService,
+    GrupoSanguineoService,
   ],
 })
 export class AppModule {}
