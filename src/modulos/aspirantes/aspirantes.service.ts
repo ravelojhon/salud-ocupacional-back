@@ -59,6 +59,52 @@ export class AspirantesService {
             result.input('NombresEmer', sql.VarChar(255), createAspiranteDTO.NombresEmer || null);
             result.input('TelefonoEmer', sql.VarChar(255), createAspiranteDTO.TelefonoEmer || null);
             result.input('CorreoEmer', sql.VarChar(255), createAspiranteDTO.CorreoEmer || null);
+            // Tratamiento de Educación
+            let tvp_educacion = new sql.Table('EducacionType');
+            tvp_educacion.create = false;
+            tvp_educacion.columns.add('NivelEducativo', sql.Int);
+            tvp_educacion.columns.add('Institucion', sql.VarChar(255));
+            tvp_educacion.columns.add('Titulo', sql.VarChar(255));
+            tvp_educacion.columns.add('Graduacion', sql.DateTime);
+
+            if (createAspiranteDTO.Educativo && createAspiranteDTO.Educativo.length > 0) {
+                createAspiranteDTO.Educativo.forEach((educacion) => {
+                    tvp_educacion.rows.add(
+                        educacion.NivelEducativo,
+                        educacion.Institucion,
+                        educacion.Titulo,
+                        educacion.Graduacion
+                    );
+                });
+            }
+
+            // Tratamiento de Experiencia
+            let tvp_experiencia = new sql.Table('ExperienciaType');
+            tvp_experiencia.create = false;
+            tvp_experiencia.columns.add('Empresa', sql.VarChar(255));
+            tvp_experiencia.columns.add('Cargo', sql.VarChar(255));
+            tvp_experiencia.columns.add('FechaInicio', sql.DateTime);
+            tvp_experiencia.columns.add('FechaFin', sql.DateTime);
+            tvp_experiencia.columns.add('Responsabilidades', sql.VarChar(sql.MAX));
+            tvp_experiencia.columns.add('Salario', sql.Decimal(18, 2));
+
+            if (createAspiranteDTO.Experiencia && createAspiranteDTO.Experiencia.length > 0) {
+                createAspiranteDTO.Experiencia.forEach((experiencia) => {
+                    tvp_experiencia.rows.add(
+                        experiencia.Empresa,
+                        experiencia.Cargo,
+                        experiencia.FechaInicio,
+                        experiencia.FechaFin,
+                        experiencia.Responsabilidades,
+                        experiencia.Salario
+                    );
+                });
+            }
+
+            // Enviar TVPs al stored procedure
+            result.input('Educacion', tvp_educacion);
+            result.input('Experiencia', tvp_experiencia);
+
             result.input('Accion', sql.VarChar(50), 'Crear');
 
             const resultado = await result.execute('sp_cli_aspirantes');
@@ -110,6 +156,53 @@ export class AspirantesService {
             result.input('NombresEmer', sql.VarChar(255), createAspiranteDTO.NombresEmer || null);
             result.input('TelefonoEmer', sql.VarChar(255), createAspiranteDTO.TelefonoEmer || null);
             result.input('CorreoEmer', sql.VarChar(255), createAspiranteDTO.CorreoEmer || null);
+
+            // Tratamiento de Educación
+            let tvp_educacion = new sql.Table('EducacionType');
+            tvp_educacion.create = false;
+            tvp_educacion.columns.add('NivelEducativo', sql.Int);
+            tvp_educacion.columns.add('Institucion', sql.VarChar(255));
+            tvp_educacion.columns.add('Titulo', sql.VarChar(255));
+            tvp_educacion.columns.add('Graduacion', sql.DateTime);
+
+            if (createAspiranteDTO.Educativo && createAspiranteDTO.Educativo.length > 0) {
+                createAspiranteDTO.Educativo.forEach((educacion) => {
+                    tvp_educacion.rows.add(
+                        educacion.NivelEducativo,
+                        educacion.Institucion,
+                        educacion.Titulo,
+                        educacion.Graduacion
+                    );
+                });
+            }
+
+            // Tratamiento de Experiencia
+            let tvp_experiencia = new sql.Table('ExperienciaType');
+            tvp_experiencia.create = false;
+            tvp_experiencia.columns.add('Empresa', sql.VarChar(255));
+            tvp_experiencia.columns.add('Cargo', sql.VarChar(255));
+            tvp_experiencia.columns.add('FechaInicio', sql.DateTime);
+            tvp_experiencia.columns.add('FechaFin', sql.DateTime);
+            tvp_experiencia.columns.add('Responsabilidades', sql.VarChar(sql.MAX));
+            tvp_experiencia.columns.add('Salario', sql.Decimal(18, 2));
+
+            if (createAspiranteDTO.Experiencia && createAspiranteDTO.Experiencia.length > 0) {
+                createAspiranteDTO.Experiencia.forEach((experiencia) => {
+                    tvp_experiencia.rows.add(
+                        experiencia.Empresa,
+                        experiencia.Cargo,
+                        experiencia.FechaInicio,
+                        experiencia.FechaFin,
+                        experiencia.Responsabilidades,
+                        experiencia.Salario
+                    );
+                });
+            }
+
+            // Enviar TVPs al stored procedure
+            result.input('Educacion', tvp_educacion);
+            result.input('Experiencia', tvp_experiencia);
+
             result.input('Accion', sql.VarChar(50), 'Editar');
 
             const resultado = await result.execute('sp_cli_aspirantes');
@@ -123,6 +216,33 @@ export class AspirantesService {
             console.log(error);
             return {
                 mensaje: 'Error al editar aspirante',
+                descripcion: error.message,
+                resultado: null,
+                status: false,
+            };
+        }
+    }
+
+    async getAspiranteById(AspiranteId: number) {
+        try {
+            const conn = await conexion.getConnection('contratos');
+            const pool = conn;
+            const result = await pool.request();
+
+            result.input('AspiranteEmpleadoId', sql.Int, AspiranteId);
+            result.input('Accion', sql.VarChar(50), 'Aspirante_By_Id');
+
+            const resultado = await result.execute('sp_cli_aspirantes');
+            return {
+                mensaje: 'Procedimiento ejecutado correctamente',
+                descripcion: 'Se ha actualizado exitosamente',
+                resultado: resultado.recordsets,
+                status: true,
+            };
+        } catch (error) {
+            console.log(error);
+            return {
+                mensaje: 'Error al editar empresa',
                 descripcion: error.message,
                 resultado: null,
                 status: false,

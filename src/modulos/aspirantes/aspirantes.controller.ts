@@ -25,4 +25,9 @@ async editAspirante(@Body() createAspiranteDTO: CreateAspiranteDTO) {
     return this.aspirantesService.editAspirante(createAspiranteDTO);
 }
 
+@Get(':id')
+async getAspiranteById(@Param('id') id: number) {
+    return this.aspirantesService.getAspiranteById(id);
+}
+
 }
