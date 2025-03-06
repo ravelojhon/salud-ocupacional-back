@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AspirantesService } from './modulos/aspirantes/aspirantes.service';
 import { AspirantesController } from './modulos/aspirantes/aspirantes.controller';
+import { OrdenService } from './modulos/orden/orden.service';
+import { OrderController } from './modulos/orden/orden.controller';
 import { AntecedentesController } from './modulos/antecedentes/antecedentes.controller';
 import { AntecedentesService } from './modulos/antecedentes/antecedentes.service';
 import { DiagnosticosController } from './modulos/diagnosticos/diagnosticos.controller';
@@ -39,10 +41,59 @@ import { FactorRiesgoLocativoService } from './modulos/factor-riesgo-locativo/fa
 import { FactorRiesgoLocativoController } from './modulos/factor-riesgo-locativo/factor-riesgo-locativo.controller';
 import { ElementosProteccionPersonalController } from './modulos/elementos-proteccion-personal/elementos-proteccion-personal.controller';
 import { ElementosProteccionPersonalService } from './modulos/elementos-proteccion-personal/elementos-proteccion-personal.service';
+import { AuthController } from './modulos/auth/auth.controller';
+import { AuthService } from './modulos/auth/auth.service';
+import { AuthModule } from './modulos/auth/auth.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController, AspirantesController, AntecedentesController, DiagnosticosController, HistoriaClinicaController, TipoDocumentosController, CiudadController, NivelEducativoController, EmpresasController, RegimenController, ActividadesEconomicasController, FactorRiesgoFisicoController, FactorRiesgoQuimicoController, FactorRiesgoBiologicoController, FactorRiesgoErgonomicoController, FactorRiesgoPsicosocialController, FactorRiesgoMecanicoController, FactorRiesgoElectricoController, FactorRiesgoLocativoController, ElementosProteccionPersonalController],
-  providers: [AppService, AspirantesService, AntecedentesService, DiagnosticosService, HistoriaClinicaService, TipoDocumentosService, CiudadService, NivelEducativoService, EmpresasService, RegimenService, ActividadesEconomicasService, FactorRiesgoFisicoService, FactorRiesgoQuimicoService, FactorRiesgoBiologicoService, FactorRiesgoErgonomicoService, FactorRiesgoPsicosocialService, FactorRiesgoMecanicoService, FactorRiesgoElectricoService, FactorRiesgoLocativoService, ElementosProteccionPersonalService],
+  imports: [AuthModule],
+  controllers: [
+    AppController,
+    AspirantesController,
+    AuthController,
+    OrderController,
+    AntecedentesController,
+    DiagnosticosController,
+    HistoriaClinicaController,
+    TipoDocumentosController,
+    CiudadController,
+    NivelEducativoController,
+    EmpresasController,
+    RegimenController,
+    ActividadesEconomicasController,
+    FactorRiesgoFisicoController,
+    FactorRiesgoQuimicoController,
+    FactorRiesgoBiologicoController,
+    FactorRiesgoErgonomicoController,
+    FactorRiesgoPsicosocialController,
+    FactorRiesgoMecanicoController,
+    FactorRiesgoElectricoController,
+    FactorRiesgoLocativoController,
+    ElementosProteccionPersonalController,
+  ],
+  providers: [
+    AppService,
+    AspirantesService,
+    AntecedentesService,
+    OrdenService,
+    DiagnosticosService,
+    HistoriaClinicaService,
+    TipoDocumentosService,
+    CiudadService,
+    AuthService,
+    NivelEducativoService,
+    EmpresasService,
+    RegimenService,
+    ActividadesEconomicasService,
+    FactorRiesgoFisicoService,
+    FactorRiesgoQuimicoService,
+    FactorRiesgoBiologicoService,
+    FactorRiesgoErgonomicoService,
+    FactorRiesgoPsicosocialService,
+    FactorRiesgoMecanicoService,
+    FactorRiesgoElectricoService,
+    FactorRiesgoLocativoService,
+    ElementosProteccionPersonalService,
+  ],
 })
 export class AppModule {}
