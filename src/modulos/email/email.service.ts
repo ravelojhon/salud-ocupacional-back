@@ -44,4 +44,27 @@ export class EmailService {
     }
   }
 
+  async sendMailOrdenAprobada(sendOrdenEmailDto: SendOrdenToCompanyDto) {
+    const config = await this.emailControl('SendAprobacionMail');
+    try {
+        console.log(sendOrdenEmailDto);
+        const send = await this.mailerService.sendMail({
+            transporterName: 'SendAprobacionMail',
+            to: sendOrdenEmailDto.Email,
+            from: '"Develop mobilsoft" <proyectos@mobilsoft.co>',
+            subject: 'Orden Médica Aprobada',
+            template: 'orden-aprobada',
+            context: {
+                NombreUsuarioAsigna: sendOrdenEmailDto.NombreUsuarioAsigna,
+                NombreResponsable: sendOrdenEmailDto.NombreResponsable,
+                url: sendOrdenEmailDto.Url,
+            },
+        });
+        console.log('Correo de orden aprobada enviado:', send);
+        return sendOrdenEmailDto;
+    } catch (error) {
+        console.error('Error al enviar el correo de orden aprobada:', error);
+    }
+}
+
 }
