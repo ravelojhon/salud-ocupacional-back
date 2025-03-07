@@ -38,4 +38,9 @@ export class CreateOrderDTO {
   @IsNotEmpty()
   @IsString()
   userId: number;
+
+  @ApiProperty({ description: '' })
+  @IsNotEmpty()
+  @IsString()
+  prestadorId: number;
 }

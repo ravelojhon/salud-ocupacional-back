@@ -38,6 +38,7 @@ export class OrdenService {
       result.input('date', sql.DateTime, createOrderDTO.date);
       result.input('typeOrder', sql.VarChar(10), createOrderDTO.typeOrder);
       result.input('userId', sql.Int, createOrderDTO.userId);
+      result.input('prestadorId', sql.Int, createOrderDTO.prestadorId);
       result.input('Accion', sql.Char(1), 'C');
 
       // Ejecutar el procedimiento almacenado
