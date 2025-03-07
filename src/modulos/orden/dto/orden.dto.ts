@@ -44,3 +44,15 @@ export class CreateOrderDTO {
   @IsString()
   prestadorId: number;
 }
+
+export class AprovedOrderDTO {
+  @ApiProperty({ description: '' })
+  @IsOptional()
+  @IsInt()
+  ordenId?: number;
+
+  @ApiProperty({ description: '' })
+  @IsNotEmpty()
+  @IsString()
+  userAprovedId: number;
+}

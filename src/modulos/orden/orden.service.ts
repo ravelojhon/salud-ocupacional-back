@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import conexion from './../../config/database';
 import * as sql from 'mssql'; // Importación correcta
-import { CreateOrderDTO } from './dto/orden.dto';
+import { AprovedOrderDTO, CreateOrderDTO } from './dto/orden.dto';
 import { EmailService } from '../email/email.service';
 import { SendOrdenToCompanyDto } from '../email/dto/sendOrdenToCompany.dto';
 
@@ -70,13 +70,50 @@ export class OrdenService {
             status: false,
         };
     }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-      // return {
-      //   mensaje: 'Procedimiento ejecutado correctamente',
-      //   descripcion: 'Se ha guardado exitosamente',
-      //   resultado: resultado.recordsets,
-      //   status: true,
-      // };
+  
+  async aprovedOrden(aprovedOrderDTO: AprovedOrderDTO) {
+    try {
+      const conn = await conexion.getConnection('contratos');
+      const pool = conn; // El `conn` ya es el pool de conexión.
+      const result = await pool.request(); // Crea una solicitud SQL usando el pool
+
+      result.input('orderId', sql.Int, aprovedOrderDTO.ordenId);
+      result.input('userAprovedId', sql.Int, aprovedOrderDTO.userAprovedId);
+      result.input('Accion', sql.Char(1), 'A');
+      // Ejecutar el procedimiento almacenado
+      const resultado = await result.execute('sp_cli_order');
+      console.log(resultado?.recordsets[0])
+      const dataForEmail = resultado?.recordsets[0][0];
+      if (resultado.returnValue === 0) { // Verifica si el procedimiento se ejecutó correctamente
+        // Envía el correo electrónico
+        const sendOrdenToCompanyDto: SendOrdenToCompanyDto = {
+          NombreUsuarioAsigna: dataForEmail.NombreUsuarioAsigna,
+          NombreResponsable: dataForEmail.NombreResponsable,
+          Url: `${process.env.URL_APP_PRODUCTION}/admin/expedition-order`,
+          Email: dataForEmail.EmailEmpresaResponsable
+        };
+        await this.emailService.sendMailOrdenAprobada(sendOrdenToCompanyDto);
+
+        return {
+            mensaje: 'Procedimiento ejecutado correctamente',
+            descripcion: 'Se ha guardado exitosamente',
+            resultado: resultado.recordsets,
+            status: true,
+        };
+    } else {
+        // Manejar el error del procedimiento almacenado
+        return {
+            mensaje: 'Error al ejecutar el procedimiento',
+            descripcion: 'No se pudo guardar la orden',
+            resultado: resultado.recordsets,
+            status: false,
+        };
+    }
     } catch (error) {
       console.log(error);
     }
