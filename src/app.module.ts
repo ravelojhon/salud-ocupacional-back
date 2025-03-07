@@ -61,9 +61,12 @@ import { GrupoSanguineoService } from './modulos/grupo-sanguineo/grupo-sanguineo
 import { GrupoSanguineoController } from './modulos/grupo-sanguineo/grupo-sanguineo.controller';
 import { ServiciosController } from './modulos/servicios/servicios.controller';
 import { ServicioService } from './modulos/servicios/servicios.service';
+import { EmailService } from './modulos/email/email.service';
+import { EmailController } from './modulos/email/email.controller';
+import { EmailModule } from './modulos/email/email.module';
 
 @Module({
-  imports: [AuthModule],
+  imports: [AuthModule, EmailModule],
   controllers: [
     AppController,
     AspirantesController,
@@ -95,7 +98,8 @@ import { ServicioService } from './modulos/servicios/servicios.service';
     FondoPensionesController,
     GrupoSanguineoController,
     EstadoCivilController,
-    ServiciosController
+    ServiciosController,
+    EmailController
   ],
   providers: [
     AppService,
@@ -128,6 +132,7 @@ import { ServicioService } from './modulos/servicios/servicios.service';
     EstadoCivilService,
     GrupoSanguineoService,
     ServicioService,
+    EmailService,
   ],
 })
 export class AppModule {}
