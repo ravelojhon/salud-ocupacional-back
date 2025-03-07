@@ -59,6 +59,8 @@ import { EstadoCivilController } from './modulos/estado-civil/estado-civil.contr
 import { EstadoCivilService } from './modulos/estado-civil/estado-civil.service';
 import { GrupoSanguineoService } from './modulos/grupo-sanguineo/grupo-sanguineo.service';
 import { GrupoSanguineoController } from './modulos/grupo-sanguineo/grupo-sanguineo.controller';
+import { ServiciosController } from './modulos/servicios/servicios.controller';
+import { ServicioService } from './modulos/servicios/servicios.service';
 
 @Module({
   imports: [AuthModule],
@@ -93,6 +95,7 @@ import { GrupoSanguineoController } from './modulos/grupo-sanguineo/grupo-sangui
     FondoPensionesController,
     GrupoSanguineoController,
     EstadoCivilController,
+    ServiciosController
   ],
   providers: [
     AppService,
@@ -124,6 +127,7 @@ import { GrupoSanguineoController } from './modulos/grupo-sanguineo/grupo-sangui
     FondoPensionesService,
     EstadoCivilService,
     GrupoSanguineoService,
+    ServicioService,
   ],
 })
 export class AppModule {}
