@@ -33,4 +33,9 @@ export class CreateOrderDTO {
   @IsString()
   @MaxLength(10)
   typeOrder: string;
+
+  @ApiProperty({ description: '' })
+  @IsNotEmpty()
+  @IsString()
+  userId: number;
 }

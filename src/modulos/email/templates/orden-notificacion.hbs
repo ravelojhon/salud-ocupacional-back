@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Notificación de Orden Médica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    .container {
+      width: 80%;
+      margin: 20px auto;
+      border: 1px solid #ddd;
+      padding: 20px;
+    }
+    .header {
+      background-color: #f0f0f0;
+      padding: 10px;
+      text-align: center;
+    }
+    .content {
+      margin-top: 20px;
+    }
+    .button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Notificación de Orden Médica</h1>
+    </div>
+    <div class="content">
+      <p>Estimado/a Representante Legal,</p>
+      <p>Se ha generado una nueva Orden Médica en nuestra aplicación. A continuación, encontrará los detalles:</p>
+
+      <ul>
+        <li><strong>Usuario que asigna:</strong> {{NombreUsuarioAsigna}}</li>
+        <li><strong>Responsable:</strong> {{NombreResponsable}}</li>
+      </ul>
+
+      <p>Por favor, acceda a la aplicación para revisar y autorizar la orden médica.</p>
+
+      <p>Puede acceder a la orden médica a través del siguiente enlace:</p>
+      <p><a href="{{url}}" class="button">Revisar Orden Médica</a></p>
+
+      <p>Agradecemos su pronta atención a este asunto.</p>
+    </div>
+  </div>
+</body>
+</html>
