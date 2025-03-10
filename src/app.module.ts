@@ -61,6 +61,14 @@ import { GrupoSanguineoService } from './modulos/grupo-sanguineo/grupo-sanguineo
 import { GrupoSanguineoController } from './modulos/grupo-sanguineo/grupo-sanguineo.controller';
 import { ServiciosController } from './modulos/servicios/servicios.controller';
 import { ServicioService } from './modulos/servicios/servicios.service';
+import { PermisosController } from './modulos/permisos/permisos.controller';
+import { PermisosService } from './modulos/permisos/permisos.service';
+import { PerfilesController } from './modulos/perfiles/perfiles.controller';
+import { PerfilesService } from './modulos/perfiles/perfiles.service';
+import { ConsecutivosController } from './modulos/consecutivos/consecutivos.controller';
+import { ConsecutivosService } from './modulos/consecutivos/consecutivos.service';
+import { UsuariosController } from './modulos/usuarios/usuarios.controller';
+import { UsuariosService } from './modulos/usuarios/usuarios.service';
 
 @Module({
   imports: [AuthModule],
@@ -95,7 +103,11 @@ import { ServicioService } from './modulos/servicios/servicios.service';
     FondoPensionesController,
     GrupoSanguineoController,
     EstadoCivilController,
-    ServiciosController
+    ServiciosController,
+    PermisosController,
+    PerfilesController,
+    ConsecutivosController,
+    UsuariosController,
   ],
   providers: [
     AppService,
@@ -128,6 +140,10 @@ import { ServicioService } from './modulos/servicios/servicios.service';
     EstadoCivilService,
     GrupoSanguineoService,
     ServicioService,
+    PermisosService,
+    PerfilesService,
+    ConsecutivosService,
+    UsuariosService,
   ],
 })
 export class AppModule {}
