@@ -69,9 +69,12 @@ import { ConsecutivosController } from './modulos/consecutivos/consecutivos.cont
 import { ConsecutivosService } from './modulos/consecutivos/consecutivos.service';
 import { UsuariosController } from './modulos/usuarios/usuarios.controller';
 import { UsuariosService } from './modulos/usuarios/usuarios.service';
+import { EmailService } from './modulos/email/email.service';
+import { EmailController } from './modulos/email/email.controller';
+import { EmailModule } from './modulos/email/email.module';
 
 @Module({
-  imports: [AuthModule],
+  imports: [AuthModule, EmailModule],
   controllers: [
     AppController,
     AspirantesController,
@@ -108,6 +111,7 @@ import { UsuariosService } from './modulos/usuarios/usuarios.service';
     PerfilesController,
     ConsecutivosController,
     UsuariosController,
+    EmailController,
   ],
   providers: [
     AppService,
@@ -144,6 +148,7 @@ import { UsuariosService } from './modulos/usuarios/usuarios.service';
     PerfilesService,
     ConsecutivosService,
     UsuariosService,
+    EmailService,
   ],
 })
 export class AppModule {}
