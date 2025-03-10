@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import conexion from './../../config/database';
 import * as sql from 'mssql';
 import { JwtService } from '@nestjs/jwt';
@@ -8,32 +12,55 @@ export class AuthService {
   constructor(private jwtService: JwtService) {}
 
   async login(loginDto: any) {
-    const pool = await conexion.getConnection('contratos');
+    const conn = await conexion.getConnection('contratos');
+    const pool = conn;
+
     try {
-      const result = await pool
-        .request()
-        .input('Email', sql.VarChar(100), loginDto.email)
-        .input('Password', sql.VarChar(100), loginDto.password)
-        .execute('sp_UserLogin');
+      const { user, pass } = loginDto;
+      const request = pool.request();
 
-      const user = result.recordset[0];
-      const payload = { email: user.email, sub: user.id };
-      const token = this.jwtService.sign(payload);
+      request.input('user', sql.VarChar(50), user);
+      request.input('pass', sql.VarChar(50), pass);
+
+      const result = await request.execute('sp_auth');
+      const usuario = result.recordset[0];
+
+      if (!usuario) {
+        throw new BadRequestException({
+          success: false,
+          message: 'Credenciales incorrectas',
+          status: 401,
+        });
+      }
+
+      const token = this.jwtService.sign({
+        userId: usuario.id,
+        user: usuario.user,
+      });
 
       return {
-        status: true,
-        value: {
-          token,
-          user,
-        },
-        msgError: '',
+        success: true,
+        message: 'Usuario autenticado correctamente',
+        data: { token, usuario },
+        status: 200,
       };
-    } catch (err) {
-      return {
-        status: false,
-        value: null,
-        message: err.message,
-      };
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
+
+      throw new InternalServerErrorException({
+        success: false,
+        message: 'Error en el servidor',
+        error: error.message,
+        status: 500,
+      });
+    } finally {
+      if (conn) {
+        await conn.close().catch((err) => {
+          console.error('Error cerrando conexión:', err);
+        });
+      }
     }
   }
 }
