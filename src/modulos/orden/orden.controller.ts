@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { OrdenService } from './orden.service';
 import { AprovedOrderDTO, CreateOrderDTO } from './dto/orden.dto';
@@ -21,5 +21,15 @@ export class OrderController {
   @Post('aproved')
   async aprovedOrder(@Body() aprovedOrderDTO: AprovedOrderDTO) {
     return this.ordenService.aprovedOrden(aprovedOrderDTO);
+  }
+
+  @Get('getById/:id')
+  async getById(@Param('id') id: number) {
+    return this.ordenService.getById(id);
+  }
+
+  @Patch()
+  async editOrder(@Body() createOrderDTO: CreateOrderDTO) {
+      return this.ordenService.EditOrden(createOrderDTO);
   }
 }

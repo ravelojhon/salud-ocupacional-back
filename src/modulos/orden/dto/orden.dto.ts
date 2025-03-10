@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
+  ArrayMinSize,
+  IsArray,
   IsInt,
   IsNotEmpty,
   IsOptional,
@@ -7,7 +10,27 @@ import {
   MaxLength,
 } from 'class-validator';
 
+
+export class CupsDto {
+  @ApiProperty({ description: 'ID del servicio' })
+  @IsNotEmpty()
+  @IsInt()
+  servicioId: number;
+
+  @ApiProperty({ description: 'Código del servicio (CUPS)' })
+  @IsNotEmpty()
+  @IsString()
+  servicioCode: string;
+}
+
 export class CreateOrderDTO {
+
+  @ApiProperty({ description: '' })
+  @IsOptional()
+  @IsInt()
+  ordenId?: number;
+
+
   @ApiProperty({ description: '' })
   @IsOptional()
   @IsInt()
@@ -17,11 +40,6 @@ export class CreateOrderDTO {
   @IsOptional()
   @IsInt()
   bussineId?: number;
-
-  @ApiProperty({ description: '' })
-  @IsOptional()
-  @IsInt()
-  servicioId?: number;
 
   @ApiProperty({ description: '' })
   @IsNotEmpty()
@@ -43,6 +61,18 @@ export class CreateOrderDTO {
   @IsNotEmpty()
   @IsString()
   prestadorId: number;
+
+  // @ApiProperty({isArray : true, type: CupsDto })
+  // @IsArray()
+  // @ArrayMinSize(1, { message: 'Debe enviar al menos una url de adjunto por empresa' })
+  // @Type(() => CupsDto)
+	// cups : CupsDto[];
+
+  @ApiProperty({ isArray: true, type: CupsDto, description: 'Lista de CUPS' })
+    @IsArray()
+    @ArrayMinSize(1, { message: 'Debe enviar al menos un CUPS' })
+    @Type(() => CupsDto)
+    cups: CupsDto[];
 }
 
 export class AprovedOrderDTO {
