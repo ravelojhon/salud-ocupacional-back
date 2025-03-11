@@ -72,6 +72,16 @@ import { UsuariosService } from './modulos/usuarios/usuarios.service';
 import { EmailService } from './modulos/email/email.service';
 import { EmailController } from './modulos/email/email.controller';
 import { EmailModule } from './modulos/email/email.module';
+import { MedicosController } from './modulos/medicos/medicos.controller';
+import { MedicosService } from './modulos/medicos/medicos.service';
+import { EspecialidadesController } from './modulos/especialidades/especialidades.controller';
+import { EspecialidadesService } from './modulos/especialidades/especialidades.service';
+import { ConsultoriosService } from './modulos/consultorios/consultorios.service';
+import { ConsultoriosController } from './modulos/consultorios/consultorios.controller';
+import { AlmacenesController } from './modulos/almacenes/almacenes.controller';
+import { AlmacenesService } from './modulos/almacenes/almacenes.service';
+import { CitasController } from './modulos/citas/citas.controller';
+import { CitasService } from './modulos/citas/citas.service';
 
 @Module({
   imports: [AuthModule, EmailModule],
@@ -112,6 +122,11 @@ import { EmailModule } from './modulos/email/email.module';
     ConsecutivosController,
     UsuariosController,
     EmailController,
+    MedicosController,
+    EspecialidadesController,
+    ConsultoriosController,
+    AlmacenesController,
+    CitasController,
   ],
   providers: [
     AppService,
@@ -149,6 +164,11 @@ import { EmailModule } from './modulos/email/email.module';
     ConsecutivosService,
     UsuariosService,
     EmailService,
+    MedicosService,
+    EspecialidadesService,
+    ConsultoriosService,
+    AlmacenesService,
+    CitasService,
   ],
 })
 export class AppModule {}
