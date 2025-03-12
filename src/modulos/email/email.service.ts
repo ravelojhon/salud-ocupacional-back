@@ -1,54 +1,55 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
-import { SendCertificateToCompanyDto, SendOrdenToCompanyDto } from './dto/sendOrdenToCompany.dto';
+import {
+  SendCertificateToCompanyDto,
+  SendOrdenToCompanyDto,
+} from './dto/sendOrdenToCompany.dto';
 import { HttpService } from '@nestjs/axios';
-import * as fs from 'fs';
-import * as path from 'path';
 
 @Injectable()
 export class EmailService {
-  constructor(private mailerService: MailerService, private readonly httpService: HttpService) { }
+  constructor(
+    private mailerService: MailerService,
+    private readonly httpService: HttpService,
+  ) {}
   private async emailControl(transport: string) {
     try {
       this.mailerService.addTransporter(transport, {
         auth: { user: process.env.USER_EMAIL, pass: process.env.PASS_EMAIL },
         host: process.env.SERVER_EMAIL,
         secure: true,
-        port: parseInt(process.env.PORT_EMAIL)
+        port: parseInt(process.env.PORT_EMAIL),
       });
-      return true
-
+      return true;
     } catch (error) {
-      return false
+      return false;
     }
   }
 
   async sendMailToOrden(sendOrdenToCompanyDto: SendOrdenToCompanyDto) {
-    const config = await this.emailControl('SendTaskMail')
     try {
-      console.log(sendOrdenToCompanyDto)
+      console.log(sendOrdenToCompanyDto);
       const send = await this.mailerService.sendMail({
         transporterName: 'SendTaskMail',
         to: sendOrdenToCompanyDto.Email,
         from: '"Develop mobilsoft" <proyectos@mobilsoft.co>', // override default from
         subject: 'Asignacion de tarea - contratacion',
         template: 'orden-notificacion',
-        context: { // ✏️ filling curly brackets with content
+        context: {
+          // ✏️ filling curly brackets with content
           NombreUsuarioAsigna: sendOrdenToCompanyDto.NombreUsuarioAsigna,
           NombreResponsable: sendOrdenToCompanyDto.NombreResponsable,
           url: sendOrdenToCompanyDto.Url,
         },
       });
-      console.log(send)
-      return send
+      console.log(send);
+      return send;
     } catch (error) {
       console.error(error);
-
     }
   }
 
   async sendMailOrdenAprobada(sendOrdenEmailDto: SendOrdenToCompanyDto) {
-    const config = await this.emailControl('SendAprobacionMail');
     try {
       console.log(sendOrdenEmailDto);
       const send = await this.mailerService.sendMail({
@@ -70,10 +71,10 @@ export class EmailService {
     }
   }
 
-  async sendMailCertificateToCompany(sendCertificateToCompanyDto: SendCertificateToCompanyDto) {
-    const config = await this.emailControl('SendCertificateMail');
+  async sendMailCertificateToCompany(
+    sendCertificateToCompanyDto: SendCertificateToCompanyDto,
+  ) {
     try {
-     
       const send = await this.mailerService.sendMail({
         transporterName: 'SendCertificateMail',
         to: sendCertificateToCompanyDto.Email,
@@ -93,7 +94,7 @@ export class EmailService {
           NombrePersona: sendCertificateToCompanyDto.NombrePersona,
         },
       });
-    
+
       console.log('Correo de certificado creado enviado:', send);
 
       return send;
@@ -101,5 +102,4 @@ export class EmailService {
       console.error('Error al enviar el correo de certificado creado:', error);
     }
   }
-
 }
