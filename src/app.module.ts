@@ -72,6 +72,9 @@ import { UsuariosService } from './modulos/usuarios/usuarios.service';
 import { EmailService } from './modulos/email/email.service';
 import { EmailController } from './modulos/email/email.controller';
 import { EmailModule } from './modulos/email/email.module';
+import { CertificadosMedicosService } from './modulos/certificados-medicos/certificados-medicos.service';
+import { CertificadosMedicosController } from './modulos/certificados-medicos/certificados-medicos.controller';
+import { HttpModule } from '@nestjs/axios';
 import { MedicosController } from './modulos/medicos/medicos.controller';
 import { MedicosService } from './modulos/medicos/medicos.service';
 import { EspecialidadesController } from './modulos/especialidades/especialidades.controller';
@@ -84,7 +87,7 @@ import { CitasController } from './modulos/citas/citas.controller';
 import { CitasService } from './modulos/citas/citas.service';
 
 @Module({
-  imports: [AuthModule, EmailModule],
+  imports: [AuthModule, EmailModule, HttpModule],
   controllers: [
     AppController,
     AspirantesController,
@@ -122,6 +125,7 @@ import { CitasService } from './modulos/citas/citas.service';
     ConsecutivosController,
     UsuariosController,
     EmailController,
+    CertificadosMedicosController,
     MedicosController,
     EspecialidadesController,
     ConsultoriosController,
@@ -164,6 +168,7 @@ import { CitasService } from './modulos/citas/citas.service';
     ConsecutivosService,
     UsuariosService,
     EmailService,
+    CertificadosMedicosService,
     MedicosService,
     EspecialidadesService,
     ConsultoriosService,
