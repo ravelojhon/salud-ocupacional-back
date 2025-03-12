@@ -72,9 +72,11 @@ import { UsuariosService } from './modulos/usuarios/usuarios.service';
 import { EmailService } from './modulos/email/email.service';
 import { EmailController } from './modulos/email/email.controller';
 import { EmailModule } from './modulos/email/email.module';
-
+import { CertificadosMedicosService } from './modulos/certificados-medicos/certificados-medicos.service';
+import { CertificadosMedicosController } from './modulos/certificados-medicos/certificados-medicos.controller';
+import { HttpModule } from '@nestjs/axios';
 @Module({
-  imports: [AuthModule, EmailModule],
+  imports: [AuthModule, EmailModule, HttpModule],
   controllers: [
     AppController,
     AspirantesController,
@@ -112,6 +114,7 @@ import { EmailModule } from './modulos/email/email.module';
     ConsecutivosController,
     UsuariosController,
     EmailController,
+    CertificadosMedicosController,
   ],
   providers: [
     AppService,
@@ -149,6 +152,7 @@ import { EmailModule } from './modulos/email/email.module';
     ConsecutivosService,
     UsuariosService,
     EmailService,
+    CertificadosMedicosService,
   ],
 })
 export class AppModule {}
