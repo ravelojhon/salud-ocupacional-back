@@ -75,6 +75,17 @@ import { EmailModule } from './modulos/email/email.module';
 import { CertificadosMedicosService } from './modulos/certificados-medicos/certificados-medicos.service';
 import { CertificadosMedicosController } from './modulos/certificados-medicos/certificados-medicos.controller';
 import { HttpModule } from '@nestjs/axios';
+import { MedicosController } from './modulos/medicos/medicos.controller';
+import { MedicosService } from './modulos/medicos/medicos.service';
+import { EspecialidadesController } from './modulos/especialidades/especialidades.controller';
+import { EspecialidadesService } from './modulos/especialidades/especialidades.service';
+import { ConsultoriosService } from './modulos/consultorios/consultorios.service';
+import { ConsultoriosController } from './modulos/consultorios/consultorios.controller';
+import { AlmacenesController } from './modulos/almacenes/almacenes.controller';
+import { AlmacenesService } from './modulos/almacenes/almacenes.service';
+import { CitasController } from './modulos/citas/citas.controller';
+import { CitasService } from './modulos/citas/citas.service';
+
 @Module({
   imports: [AuthModule, EmailModule, HttpModule],
   controllers: [
@@ -115,6 +126,11 @@ import { HttpModule } from '@nestjs/axios';
     UsuariosController,
     EmailController,
     CertificadosMedicosController,
+    MedicosController,
+    EspecialidadesController,
+    ConsultoriosController,
+    AlmacenesController,
+    CitasController,
   ],
   providers: [
     AppService,
@@ -153,6 +169,11 @@ import { HttpModule } from '@nestjs/axios';
     UsuariosService,
     EmailService,
     CertificadosMedicosService,
+    MedicosService,
+    EspecialidadesService,
+    ConsultoriosService,
+    AlmacenesService,
+    CitasService,
   ],
 })
 export class AppModule {}
