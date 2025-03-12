@@ -90,12 +90,12 @@ export class MedicosService {
       });
 
       request.input('id_perfil_fk', sql.Int, body.id_perfil_fk);
-      request.input('documento', sql.VarChar(15), body.documento);
+      request.input('documento', sql.VarChar(15), String(body.documento));
       request.input('primer_nombre', sql.VarChar(50), body.primer_nombre);
       request.input('segundo_nombre', sql.VarChar(50), body.segundo_nombre);
       request.input('primer_apellido', sql.VarChar(50), body.primer_apellido);
       request.input('segundo_apellido', sql.VarChar(50), body.segundo_apellido);
-      request.input('telefono', sql.VarChar(15), body.telefono);
+      request.input('telefono', sql.VarChar(15), String(body.telefono));
       request.input('usuario', sql.VarChar(50), body.usuario);
       request.input('email', sql.VarChar(50), body.email);
       request.input('pass', sql.VarChar(100), body.password);
@@ -177,12 +177,12 @@ export class MedicosService {
 
       request.input('id', sql.Int, body.id);
       request.input('id_perfil_fk', sql.Int, body.id_perfil_fk);
-      request.input('documento', sql.VarChar(15), body.documento);
+      request.input('documento', sql.VarChar(15), String(body.documento));
       request.input('primer_nombre', sql.VarChar(50), body.primer_nombre);
       request.input('segundo_nombre', sql.VarChar(50), body.segundo_nombre);
       request.input('primer_apellido', sql.VarChar(50), body.primer_apellido);
       request.input('segundo_apellido', sql.VarChar(50), body.segundo_apellido);
-      request.input('telefono', sql.VarChar(15), body.telefono);
+      request.input('telefono', sql.VarChar(15), String(body.telefono));
       request.input('email', sql.VarChar(50), body.email);
       request.input('pass', sql.VarChar(100), body.password);
       request.input('estado', sql.Bit, 1);

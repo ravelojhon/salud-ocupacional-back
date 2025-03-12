@@ -13,10 +13,10 @@ export class CitasService {
     const pool = conn;
     try {
       const request = pool.request();
-      request.input('estado', sql.Int, body.estado);
       request.input('id_medico_fk', sql.Int, body.medico);
       request.input('id_paciente_fk', sql.Int, body.id_paciente_fk);
       request.input('id_especialidad_fk', sql.Int, body.especialidad);
+      request.input('estado', sql.Int, body.estado);
       request.input('accion', sql.Char(1), body.accion);
 
       const result = await request.execute('sp_citas');
@@ -55,8 +55,8 @@ export class CitasService {
     const pool = conn;
     try {
       const request = pool.request();
-      request.input('codalm', sql.Char(3), body.codalm);
-      request.input('codcup', sql.VarChar(10), body.codcup);
+      request.input('codalm', sql.Char(3), String(body.codalm));
+      request.input('codcup', sql.VarChar(10), String(body.codcup));
       request.input('id_paciente_fk', sql.Int, body.id_paciente_fk);
       request.input(
         'documento_paciente',
